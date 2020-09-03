@@ -1,0 +1,4 @@
+node_modules
+teste/
+coverage/
+.DS_Store

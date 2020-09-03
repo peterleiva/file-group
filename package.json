@@ -1,0 +1,25 @@
+{
+  "name": "group",
+  "version": "0.1.0",
+  "description": "Software simples para agrupar arquivos em pastas seguinte um algoritmo de critério e um de nomeação de grupos",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+		"aggregator",
+		"group file",
+    "file system",
+    "file"
+  ],
+  "author": "Peter Leiva <pleiva@id.uff.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^26.4.2"
+  },
+  "dependencies": {
+    "bytes": "^3.1.0"
+  }
+}
