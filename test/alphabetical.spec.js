@@ -1,4 +1,4 @@
-const Aggregator = require('./alphabetical');
+const Aggregator = require('../grouper/alphabetical');
 
 describe('Alphabetical', () => {
 	describe('.naming', () => {

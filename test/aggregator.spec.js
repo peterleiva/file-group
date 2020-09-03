@@ -1,4 +1,4 @@
-const Aggregator = require('./name-date');
+const Aggregator = require('../grouper/name-date');
 
 describe('NameDateAggregator', () => {
 	let strategy;
