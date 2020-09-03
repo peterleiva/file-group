@@ -41,7 +41,7 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 		const strategy = new Aggregator(dirent.name);
 
 		if (dirent.isFile() && strategy.filter()) {
-			const group = strategy.grouper();
+			const group = strategy.naming();
 
 			// set empty vector if group do not already exists
 			if (!groups.has(group)) groups.set(group, []);

@@ -25,7 +25,7 @@ class NameDateAggregator extends Aggregator {
 	/**
 	 * Groups the name following a algorithm
 	 */
-	grouper() {
+	naming() {
 		return NameDateAggregator
 			.pattern
 			.exec(this._extractName())

@@ -37,7 +37,7 @@ class Aggregator {
 	/**
 	 * Groups the name following a algorithm
 	 */
-	grouper() {
+	naming() {
 		throw new Error('Must be implemented');
 	}
 }

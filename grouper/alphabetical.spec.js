@@ -1,26 +1,26 @@
 const Aggregator = require('./alphabetical');
 
 describe('Alphabetical', () => {
-	describe('.grouper', () => {
+	describe('.naming', () => {
 		it('Returns # when begins with number', () => {
 			const strategy = new Aggregator('10 arquivo');
-			expect(strategy.grouper()).toBe('#');
+			expect(strategy.naming()).toBe('#');
 		});
 
 		it('Get the first letter of file', () => {
 			const strategy = new Aggregator('arquivo');
-			expect(strategy.grouper()).toBe('A');
+			expect(strategy.naming()).toBe('A');
 		});
 
 		describe('Special caracteres', () => {
 			it('especial when begin with space', () => {
 				const strategy = new Aggregator(' arquivo');
-				expect(strategy.grouper()).toBe('especial');
+				expect(strategy.naming()).toBe('especial');
 			});
 
 			it('especial when begin with underscore', () => {
 				const strategy = new Aggregator('_arquivo');
-				expect(strategy.grouper()).toBe('especial');
+				expect(strategy.naming()).toBe('especial');
 			})
 		})
 	});

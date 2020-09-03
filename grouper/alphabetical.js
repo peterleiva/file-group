@@ -9,7 +9,7 @@ class Alphabetical extends Aggregator {
 		return this.name.length > 0;
 	}
 
-	grouper() {
+	naming() {
 		const letter = this.name[0];
 
 		if (!Object.is(Number.parseInt(letter), NaN)) {

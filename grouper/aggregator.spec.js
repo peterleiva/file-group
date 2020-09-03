@@ -75,15 +75,15 @@ describe('NameDateAggregator', () => {
 			})
 		});
 
-		describe('.grouper', () => {
+		describe('.naming', () => {
 			it('Get null when no match', () => {
 				const strategy = new Aggregator('name - ');
-				expect(strategy.grouper()).toBeNull();
+				expect(strategy.naming()).toBeNull();
 			});
 
 			it('Get group as <name> from <name> - <date>', () => {
 				const strategy = new Aggregator('filename - 2020-02-01 23-20-50')
-				expect(strategy.grouper()).toBe('filename');
+				expect(strategy.naming()).toBe('filename');
 			});
 		})
 	});
