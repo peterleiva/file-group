@@ -1,6 +1,6 @@
 {
   "name": "group",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Software simples para agrupar arquivos em pastas seguinte um algoritmo de critério e um de nomeação de grupos",
   "main": "index.js",
   "scripts": {
