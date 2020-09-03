@@ -127,7 +127,7 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 const base = process.argv[2];
 
 if (!base) { 
-	console.error('Usage: group <dir_path>');
+	console.error('Usage: file-group <dir_path>');
 	return process.kill(process.pid, 'SIGTERM');
 }
 
