@@ -3,6 +3,8 @@
  * criateras defines two algorythm, one checking if a file is ok to be grouped
  * and the second to determine the group name according to file name
  */
+// TODO: passar dirent para algoritmo de agregação para possa filtrar por tipo
+// TODO: Agrupar alfabeticamente usando subpastas ou arquivos
 
 const fs = require('fs/promises');
 const path = require('path');
