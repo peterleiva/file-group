@@ -9,8 +9,8 @@
     "test:watch": "jest --watch"
   },
   "keywords": [
-		"aggregator",
-		"group file",
+    "aggregator",
+    "group file",
     "file system",
     "file"
   ],

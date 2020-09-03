@@ -3,7 +3,6 @@
  */
 
 const Aggregator = require('./aggregator');
-const _ = require('underscore');
 
 class Alphabetical extends Aggregator {
 	filter() {
