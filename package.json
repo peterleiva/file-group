@@ -1,7 +1,7 @@
 {
   "name": "group",
   "version": "0.2.0",
-  "description": "Software simples para agrupar arquivos em pastas seguinte um algoritmo de critério e um de nomeação de grupos",
+  "description": "Tiny software for aggregating files into folders using filter and group naming critereas",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -13,7 +13,11 @@
     "group file",
     "file system",
     "file"
-  ],
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/peterleiva/group"
+	},
   "author": "Peter Leiva <pleiva@id.uff.br>",
   "license": "MIT",
   "devDependencies": {
