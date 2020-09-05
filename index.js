@@ -34,7 +34,7 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 	// print total bytes from base folder
 	console.log(`${dirSize} Read`);
 
-	const groups = new Map();
+	const direntGroups = new Map();
 	const fStats = [];
 
 	for await (const dirent of dir) {
@@ -44,9 +44,12 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 			const group = strategy.naming();
 
 			// set empty vector if group do not already exists
-			if (!groups.has(group)) groups.set(group, []);
+			if (!direntGroups.has(group))
+				direntGroups.set(group, []);
 
-			groups.get(group).push(dirent);
+			direntGroups
+				.get(group)
+				.push(dirent);
 
 			// vector of file stats
 			const file = path.join(base, dirent.name)
@@ -57,7 +60,7 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 	// print files length to be moved
 	console.log(`${fStats.length} files found`);
 	// print groups to be created
-	console.log(`${groups.size} group(s) found`);
+	console.log(`${direntGroups.size} group(s) found`);
 	// bytes to be moved
 	let totalBytes;
 
@@ -72,9 +75,9 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 		throw error;
 	}
 
-	if (groups.size > 0) {
+	if (direntGroups.size > 0) {
 		console.log('Grouping by: ');
-		for (const group of groups.keys()) {
+		for (const group of direntGroups.keys()) {
 			console.log('\t- ' + group);
 		}
 	} else {
@@ -90,16 +93,16 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 		output: process.stdout
 	});
 
-	rl.question('Are you sure (y/N): ', async answer => {
-		if (!/[yY]/.exec(answer)) {
-			console.log('You answer is NO');
+	rl.question('Are you sure (y/N)?: ', async answer => {
+		if (!/^(y|yes)$/i.exec(answer)) {
+			console.info('You answer is NO');
 			await dir.close;
 			rl.close();
 			return;
 		}
 	
 		// create directory and move the found files
-		for (const [group, dirents] of groups) {
+		for (const [group, dirents] of direntGroups) {
 			const groupDir = path.join(base, group);
 			await fs.mkdir(groupDir, { recursive: true })
 	

@@ -13,11 +13,11 @@
     "group file",
     "file system",
     "file"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/peterleiva/group"
-	},
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/peterleiva/group"
+  },
   "author": "Peter Leiva <pleiva@id.uff.br>",
   "license": "MIT",
   "devDependencies": {
