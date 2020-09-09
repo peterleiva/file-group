@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /**
  * @file Group files, other than directories, using certain criteras. Those
  * criateras defines two algorythm, one checking if a file is ok to be grouped
@@ -6,6 +8,7 @@
 // TODO: passar dirent para algoritmo de agregação para possa filtrar por tipo
 // TODO: Agrupar alfabeticamente usando subpastas ou arquivos
 
+const program = require('./lib/commander');
 const fs = require('fs/promises');
 const path = require('path');
 const bytes = require('bytes');
@@ -16,12 +19,11 @@ const organizer = require('./lib/organizer');
 const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
 /**
  * Main point from the application
- *
+ * TODO: melhorra errors ao abrir diretório
  * @param {string} base
  */
-async function main(base = __dirname, aggregator = 'alphabetical') {
+async function main(base, aggregator) {
 	const byteOpts = { thousandsSeparator: '.' }
-
 	const Aggregator = grouper[aggregator];
 
 	if (!Aggregator) {
@@ -119,12 +121,5 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 	});
 }
 
-const base = process.argv[2];
-
-if (!base) { 
-	console.error('Usage: file-group <directory>');
-	return;
-}
-
-main(base, process.argv[3])
+main(program.directory, program.aggregator)
 	.catch(console.error);
