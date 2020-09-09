@@ -8,13 +8,14 @@
 // TODO: passar dirent para algoritmo de agregação para possa filtrar por tipo
 // TODO: Agrupar alfabeticamente usando subpastas ou arquivos
 
-const program = require('./lib/commander');
-const fs = require('fs/promises');
-const path = require('path');
-const bytes = require('bytes');
-const readline = require('readline');
-const grouper = require('./grouper');
-const organizer = require('./lib/organizer');
+import program from './lib/commander.js';
+import fs from 'fs/promises';
+import path from 'path';
+import bytes from 'bytes';
+import readline from 'readline';
+import organizer from './lib/organizer.js';
+import mapper from './lib/mapper.js';
+import stats from './lib/stats.js';
 
 const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
 /**
@@ -23,76 +24,30 @@ const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
  * @param {string} base
  */
 async function main(base, aggregator) {
-	const byteOpts = { thousandsSeparator: '.' }
-	const Aggregator = grouper[aggregator];
-
-	if (!Aggregator) {
-		console.error('Failed to load aggregator algorythm');
-		return;
+	let Aggregator;
+	try {
+		const module = await import(path.resolve('grouper', aggregator + '.js'));
+		Aggregator = module.default
+	} catch (error) {
+		console.error('Failed to load aggregator algorithm');
+		process.exit(1);
 	}
 
-	const dir = await fs.opendir(base);
-	const dirStat = await fs.stat(base);
-	const dirSize = bytes(dirStat.size, byteOpts);
-
-	// print total bytes from base folder
-	console.log(`${dirSize} Read`);
-
-	const direntGroups = new Map();
-	const fStats = [];
-	
-	for await (const dirent of dir) {
-		const strategy = new Aggregator(dirent.name);
-
-		if (dirent.isFile() && strategy.filter()) {
-			const group = strategy.naming();
-
-			// set empty vector if group do not already exists
-			if (!direntGroups.has(group))
-				direntGroups.set(group, []);
-
-			direntGroups
-				.get(group)
-				.push(dirent);
-
-			// vector of file stats
-			const file = path.join(base, dirent.name)
-			fStats.push(fs.stat(file));
-		}
-	}
-
-	// print files length to be moved
-	console.log(`${fStats.length} files found`);
-	// print groups to be created
-	console.log(`${direntGroups.size} group(s) found`);
-	// bytes to be moved
-	let totalBytes;
+	let directory;
 
 	try {
-		const size = (await Promise.all(fStats))
-			.reduce((sum, file) => sum + file.size, 0);
-		totalBytes = bytes(size, byteOpts);
-
-	} catch(error) {
-		console.log('Error trying to load files stats');
-		await dir.close();
-		throw error;
+		directory = await fs.opendir(base);
+	} catch (error) {
+		console.error('Failed to open directory: ', path.resolve(base));
+		console.error(error.message);
+		process.exit(1);
 	}
 
-	// show groups
-	if (direntGroups.size > 0) {
-		console.log('Grouping by: ');
-		for (const group of direntGroups.keys()) {
-			console.log('\t- ' + group);
-		}
-	} else {
-		await dir.close;
-		return;
-	}
+	const direntGroups = await mapper(Aggregator, directory);
+	const directoryStats = stats(direntGroups, base);
 
-	// asking if they're sure of the operation
-	console.log(`You're moving ${totalBytes} from ${path.resolve(base)}`);
-	
+	directoryStats.groups();
+
 	const rl = readline.createInterface({
 		input: process.stdin,
 		output: process.stdout
@@ -101,23 +56,13 @@ async function main(base, aggregator) {
 	rl.question('Are you sure (y/N)?: ', async answer => {
 		if (!ACCEPTANCE_PATTERN.exec(answer)) {
 			console.info('You answer is NO');
-			await dir.close;
-			rl.close();
-			return;
+			return rl.close();
 		}
-		
+
+		directoryStats.files();
 		await organizer(base, direntGroups);
-	
-		// print bytes found moved
-		console.log(`${totalBytes} moved`);
-	
-		try { await dir.close }
-		catch(error) {
-			console.error('Failed to close directory');
-			throw error;
-		} finally {
-			rl.close();
-		}
+
+		rl.close();
 	});
 }
 
