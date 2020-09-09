@@ -3,6 +3,10 @@
   "version": "0.3.1",
   "description": "Tiny software for aggregating files into folders using filter and group naming critereas",
   "main": "index.js",
+  "engines": {
+    "node": "12.18.3"
+  },
+  "type": "module",
   "scripts": {
     "start": "node index.js",
     "test": "jest",
@@ -22,12 +26,13 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^26.4.2"
-	},
-	"bin": {
-		"file-group": "./index.js"
-	},
+  },
+  "bin": {
+    "file-group": "./index.js"
+  },
   "dependencies": {
     "bytes": "^3.1.0",
-    "commander": "^6.1.0"
+    "commander": "^6.1.0",
+    "pluralize": "^8.0.0"
   }
 }

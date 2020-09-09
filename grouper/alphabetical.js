@@ -2,9 +2,9 @@
  * @file Aggregator by first letter of file
  */
 
-const Aggregator = require('./aggregator');
+import Aggregator from './aggregator.js';
 
-class Alphabetical extends Aggregator {
+export default class Alphabetical extends Aggregator {
 	filter() {
 		return this.name.length > 0;
 	}
@@ -21,5 +21,3 @@ class Alphabetical extends Aggregator {
 		}
 	}
 }
-
-module.exports = Alphabetical;

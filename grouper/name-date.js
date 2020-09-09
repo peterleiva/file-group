@@ -2,13 +2,12 @@
  * @file Strategy use to group test and group files
  */
 
-const path = require('path');
-const Aggregator = require('./aggregator');
+import Aggregator from './aggregator.js'
 
 /**
- * 	
+ *
  */
-class NameDateAggregator extends Aggregator {
+export default class NameDateAggregator extends Aggregator {
 	static pattern = /^(.+) - (\d{4})(-(\d{2})){2} (-?(\d{2})){3}$/;
 
 	constructor(name) {
@@ -33,5 +32,3 @@ class NameDateAggregator extends Aggregator {
 			?.toLocaleLowerCase() || null;
 	}
 }
-
-module.exports = NameDateAggregator;

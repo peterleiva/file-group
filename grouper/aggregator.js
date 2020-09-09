@@ -2,12 +2,12 @@
  * @file Strategy use to group test and group files
  */
 
-const path = require('path');
+import path from 'path';
 
 /**
- * 	
+ *
  */
-class Aggregator {
+export default class Aggregator {
 	constructor(name) {
 		this.name = name;
 	}
@@ -41,5 +41,3 @@ class Aggregator {
 		throw new Error('Must be implemented');
 	}
 }
-
-module.exports = Aggregator;
