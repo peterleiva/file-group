@@ -11,7 +11,9 @@ const path = require('path');
 const bytes = require('bytes');
 const readline = require('readline');
 const grouper = require('./grouper');
+const organizer = require('./lib/organizer');
 
+const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
 /**
  * Main point from the application
  *
@@ -36,7 +38,7 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 
 	const direntGroups = new Map();
 	const fStats = [];
-
+	
 	for await (const dirent of dir) {
 		const strategy = new Aggregator(dirent.name);
 
@@ -75,6 +77,7 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 		throw error;
 	}
 
+	// show groups
 	if (direntGroups.size > 0) {
 		console.log('Grouping by: ');
 		for (const group of direntGroups.keys()) {
@@ -94,25 +97,14 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 	});
 
 	rl.question('Are you sure (y/N)?: ', async answer => {
-		if (!/^(y|yes)$/i.exec(answer)) {
+		if (!ACCEPTANCE_PATTERN.exec(answer)) {
 			console.info('You answer is NO');
 			await dir.close;
 			rl.close();
 			return;
 		}
-	
-		// create directory and move the found files
-		for (const [group, dirents] of direntGroups) {
-			const groupDir = path.join(base, group);
-			await fs.mkdir(groupDir, { recursive: true })
-	
-			// move files to groups
-			for (const dir of dirents) {
-				const oldPath = path.join(base, dir.name);
-				const newPath = path.join(base, group, dir.name);
-				await fs.rename(oldPath, newPath);
-			}
-		}
+		
+		await organizer(base, direntGroups);
 	
 		// print bytes found moved
 		console.log(`${totalBytes} moved`);
@@ -130,8 +122,8 @@ async function main(base = __dirname, aggregator = 'alphabetical') {
 const base = process.argv[2];
 
 if (!base) { 
-	console.error('Usage: file-group <dir_path>');
-	return process.kill(process.pid, 'SIGTERM');
+	console.error('Usage: file-group <directory>');
+	return;
 }
 
 main(base, process.argv[3])
