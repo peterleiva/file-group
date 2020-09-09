@@ -26,9 +26,11 @@ const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
 async function main(base, aggregator) {
 	let Aggregator;
 	try {
-		const module = await import(path.resolve('grouper', aggregator + '.js'));
+		const aggregatorPath = path.resolve('lib', 'grouper', aggregator + '.js');
+		const module = await import(aggregatorPath);
 		Aggregator = module.default
 	} catch (error) {
+		console.log(error);
 		console.error('Failed to load aggregator algorithm');
 		process.exit(1);
 	}
