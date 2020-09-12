@@ -18,10 +18,7 @@
     "file system",
     "file"
   ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/peterleiva/group"
-  },
+  "repository": "git://github.com/peterleiva/group.git",
   "author": "Peter Leiva <pleiva@id.uff.br>",
   "license": "MIT",
   "devDependencies": {
@@ -29,7 +26,10 @@
   },
   "bin": {
     "file-group": "./index.js"
-  },
+	},
+	"publishConfig": {
+		"registry": "https://npm.pkg.github.com/"
+	},
   "dependencies": {
     "bytes": "^3.1.0",
     "commander": "^6.1.0",
