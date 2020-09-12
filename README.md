@@ -1,3 +1,38 @@
-Tiny software to aggregate file system into folder, following a naming and filter
-criterea it works, in some ways, as a GROUP from SQL world. Only group files which
-pass the filter algorithm
+# File-group
+
+Tiny shell script written in *javascript* to **group the file system into folders**. Given a directory and a choosen pre-built algorithm it use some criterias to filter and naming the director. In some ways, it works as a simplified version of GROUP operation in SQL world
+
+## Installation
+
+Use [npm](http://npmjs.com/) to install file-group
+```bash
+npm install -g file-group
+```
+
+## Usage
+The only required option is the `directory` which you specifie the directory to aggregate.
+
+```javascript
+file-group --directory ./dir_to_be_aggregated
+```
+
+### Choosing an aggregator
+You can also choose one of pre-built aggregator algorythm
+```javascript
+file-group --directory ./dir_to_be_aggregated ---aggregator alphabetical
+```
+### Aggregators
+
+|Aggregator| description |
+|------------------|:----------:|
+| `alphabetical` | Group folders into alphabetical order from A to Z |
+| `name-date` | Match name followed by date format. eg. `some filename 2020-09-12.ext`|
+
+## Roadmap
+The next step is to  provide your own filter/naming (WIP) convention to perform the operation.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+## Project status
+The current project is on *development*, thereof some features may contain some inconsistencies algo applies to aggregator algorythms. ~~Please, checks the code coverage for more informations~~
