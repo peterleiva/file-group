@@ -11,13 +11,14 @@
 import program from './lib/commander.js';
 import fs from 'fs/promises';
 import path from 'path';
-import bytes from 'bytes';
 import readline from 'readline';
 import organizer from './lib/organizer.js';
 import mapper from './lib/mapper.js';
 import stats from './lib/stats.js';
+import { fileURLToPath } from 'url';
 
 const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 /**
  * Main point from the application
  * TODO: melhorra errors ao abrir diretório
@@ -26,7 +27,7 @@ const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
 async function main(base, aggregator) {
 	let Aggregator;
 	try {
-		const aggregatorPath = path.resolve('lib', 'grouper', aggregator + '.js');
+		const aggregatorPath = path.resolve(__dirname, 'lib', 'grouper', aggregator + '.js');
 		const module = await import(aggregatorPath);
 		Aggregator = module.default
 	} catch (error) {

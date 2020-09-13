@@ -1,6 +1,6 @@
 {
   "name": "file-group",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Tiny software for aggregating files into folders using filter and group naming critereas",
   "main": "index.js",
   "engines": {
