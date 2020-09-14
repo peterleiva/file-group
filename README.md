@@ -19,14 +19,14 @@ file-group --directory ./dir_to_be_aggregated
 ### Choosing an aggregator
 You can also choose one of pre-built aggregator algorythm
 ```javascript
-file-group --directory ./dir_to_be_aggregated ---aggregator alphabetical
+file-group --directory ./dir_to_be_aggregated --aggregator alphabetical
 ```
 ### Aggregators
 
 |Aggregator| description |
 |------------------|:----------:|
 | `alphabetical` | Group folders into alphabetical order from A to Z |
-| `name-date` | Match name followed by date format. eg. `some filename 2020-09-12.ext`|
+| `name-date` | Match name followed by date format. eg. `Some filename 2020-09-12.ext`|
 
 ## Roadmap
 The next step is to  provide your own filter/naming (WIP) convention to perform the operation.
@@ -35,4 +35,4 @@ The next step is to  provide your own filter/naming (WIP) convention to perform 
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ## Project status
-The current project is on *development*, thereof some features may contain some inconsistencies algo applies to aggregator algorythms. ~~Please, checks the code coverage for more informations~~
+The current project is under *development*, thereof some features may contain some inconsistencies. ~~Please, checks the code coverage for more informations~~
