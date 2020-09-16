@@ -1,38 +1,43 @@
 {
-  "name": "file-group",
-  "version": "0.3.3",
-  "description": "Tiny software for aggregating files into folders using filter and group naming critereas",
-  "main": "index.js",
-  "engines": {
-    "node": "12.18.3"
-  },
-  "type": "module",
-  "scripts": {
-    "start": "node index.js",
-    "test": "jest",
-    "test:watch": "jest --watch"
-  },
-  "keywords": [
-    "aggregator",
-    "group file",
-    "file system",
-    "file"
-  ],
-  "repository": {
+	"name": "file-group",
+	"version": "0.3.3",
+	"description": "Tiny software for aggregating files into folders using filter and group naming critereas",
+	"main": "index.js",
+	"engines": {
+		"node": "12.18.3"
+	},
+	"type": "module",
+	"scripts": {
+		"start": "npm run lint && node index.js",
+		"lint": "eslint .",
+		"prettier:check": "prettier --check .",
+		"test": "jest --config ./jest.config.json",
+		"test:watch": "npm run jest -- --watch"
+	},
+	"keywords": [
+		"aggregator",
+		"group file",
+		"file system",
+		"file"
+	],
+	"repository": {
 		"type": "url",
 		"url": "https://github.com/peterleiva/group"
 	},
-  "author": "Peter Leiva <pleiva@id.uff.br>",
-  "license": "MIT",
-  "devDependencies": {
-    "jest": "^26.4.2"
-  },
-  "bin": {
-    "file-group": "./index.js"
+	"author": "Peter Leiva <pleiva@id.uff.br>",
+	"license": "MIT",
+	"devDependencies": {
+		"eslint": "^7.9.0",
+		"eslint-plugin-node": "^11.1.0",
+		"jest": "^26.4.2",
+		"prettier": "^2.1.2"
 	},
-  "dependencies": {
-    "bytes": "^3.1.0",
-    "commander": "^6.1.0",
-    "pluralize": "^8.0.0"
-  }
+	"bin": {
+		"file-group": "./index.js"
+	},
+	"dependencies": {
+		"bytes": "^3.1.0",
+		"commander": "^6.1.0",
+		"pluralize": "^8.0.0"
+	}
 }
