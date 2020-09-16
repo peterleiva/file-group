@@ -1,4 +1,4 @@
-const Aggregator = require('../grouper/alphabetical');
+import Aggregator from '../lib/grouper/alphabetical';
 
 describe('Alphabetical', () => {
 	describe('.naming', () => {
@@ -21,13 +21,13 @@ describe('Alphabetical', () => {
 			it('especial when begin with underscore', () => {
 				const strategy = new Aggregator('_arquivo');
 				expect(strategy.naming()).toBe('especial');
-			})
-		})
+			});
+		});
 	});
 
 	describe('.filter', () => {
 		it('Always returns true', () => {
 			expect(new Aggregator('whaetever').filter()).toBe(true);
-		})
-	})
+		});
+	});
 });

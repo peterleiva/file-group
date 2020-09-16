@@ -1,9 +1,9 @@
-const Aggregator = require('../grouper/name-date');
+import Aggregator from '../lib/grouper/name-date';
 
 describe('NameDateAggregator', () => {
 	let strategy;
 
-	afterEach(() => strategy = null)
+	afterEach(() => (strategy = null));
 
 	describe('No name giving', () => {
 		it('Throws no given name error', () => {
@@ -25,17 +25,17 @@ describe('NameDateAggregator', () => {
 				});
 
 				it('Miss last 2 char number', () => {
-					strategy = new Aggregator('name - 2020-02-01-23-20')
+					strategy = new Aggregator('name - 2020-02-01-23-20');
 					expect(strategy.filter()).toBe(false);
 				});
 
 				it('Has only the date part', () => {
-					strategy = new Aggregator('2020-02-01-23-20-50')
+					strategy = new Aggregator('2020-02-01-23-20-50');
 					expect(strategy.filter()).toBe(false);
 				});
 
 				it('Has only the name part', () => {
-					strategy = new Aggregator('name - ')
+					strategy = new Aggregator('name - ');
 					expect(strategy.filter()).toBe(false);
 				});
 
@@ -51,7 +51,7 @@ describe('NameDateAggregator', () => {
 			});
 
 			describe('Returns true when', () => {
-				const name = 'name - 2020-02-01 23-20-50'
+				const name = 'name - 2020-02-01 23-20-50';
 
 				it('Have exact format <name> - <date>', () => {
 					strategy = new Aggregator(name);
@@ -72,7 +72,7 @@ describe('NameDateAggregator', () => {
 					strategy = new Aggregator('é' + name);
 					expect(strategy.filter()).toBe(true);
 				});
-			})
+			});
 		});
 
 		describe('.naming', () => {
@@ -82,9 +82,9 @@ describe('NameDateAggregator', () => {
 			});
 
 			it('Get group as <name> from <name> - <date>', () => {
-				const strategy = new Aggregator('filename - 2020-02-01 23-20-50')
+				const strategy = new Aggregator('filename - 2020-02-01 23-20-50');
 				expect(strategy.naming()).toBe('filename');
 			});
-		})
+		});
 	});
 });
