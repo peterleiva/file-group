@@ -25,51 +25,47 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * @param {string} base
  */
 async function main(base, aggregator) {
-	let Aggregator;
-	try {
-		const aggregatorPath = path.resolve(
-			__dirname,
-			'lib',
-			'grouper',
-			aggregator + '.js'
-		);
-		const module = await import(aggregatorPath);
-		Aggregator = module.default;
-	} catch (error) {
-		console.error('Failed to load aggregator algorithm');
-		throw error;
-	}
+  let Aggregator;
+  try {
+    const module = await import(
+      path.resolve(__dirname, 'lib', 'grouper', aggregator + '.js')
+    );
+    Aggregator = module.default;
+  } catch (error) {
+    console.error('Failed to load aggregator algorithm');
+    throw error;
+  }
 
-	let directory;
+  let directory;
 
-	try {
-		directory = await fs.opendir(base);
-	} catch (error) {
-		console.error('Failed to open directory: ', path.resolve(base));
-		throw error;
-	}
+  try {
+    directory = await fs.opendir(base);
+  } catch (error) {
+    console.error('Failed to open directory: ', path.resolve(base));
+    throw error;
+  }
 
-	const direntGroups = await mapper(Aggregator, directory);
-	const directoryStats = stats(direntGroups, base);
+  const direntGroups = await mapper(Aggregator, directory);
+  const directoryStats = stats(direntGroups, base);
 
-	directoryStats.groups();
+  directoryStats.groups();
 
-	const rl = readline.createInterface({
-		input: process.stdin,
-		output: process.stdout,
-	});
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
 
-	rl.question('Are you sure (y/N)?: ', async (answer) => {
-		if (!ACCEPTANCE_PATTERN.exec(answer)) {
-			console.info('You answer is NO');
-			return rl.close();
-		}
+  rl.question('Are you sure (y/N)?: ', async (answer) => {
+    if (!ACCEPTANCE_PATTERN.exec(answer)) {
+      console.info('You answer is NO');
+      return rl.close();
+    }
 
-		directoryStats.files();
-		await organizer(base, direntGroups);
+    directoryStats.files();
+    await organizer(base, direntGroups);
 
-		rl.close();
-	});
+    rl.close();
+  });
 }
 
 main(program.directory, program.aggregator).catch(console.error);
