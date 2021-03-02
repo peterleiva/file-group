@@ -1,12 +1,12 @@
 {
   "name": "file-group",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "Peter Leiva <pleiva@id.uff.br>",
   "license": "MIT",
   "description": "Tiny software for aggregating files into folders using filter and group naming critereas",
   "main": "index.js",
   "engines": {
-    "node": ">=12.18.4"
+    "node": ">=14.16.0"
   },
   "type": "module",
   "scripts": {
