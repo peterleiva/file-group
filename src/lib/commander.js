@@ -9,20 +9,16 @@ program
   .version(pkg.version)
   .name("file-group")
   .description(
-    "File aggregator group files into folders, using a existing " +
-      "algorithms or used a combination of filter and naming options"
+    "File aggregator: Group files into folders, using a existing " +
+      "algorithms or uses a combination of filter and naming convention options"
   );
 
 program
   .requiredOption("-d | --directory <dir>", "directory path to be aggregated")
+  .requiredOption("-a | --aggregator <algorithm>", "aggregator")
   .option("-f | --filter <pattern>", "filter pattern as regex")
   .option("-n | --naming <pattern>", "naming pattern as regex??")
-  .option("--debug", "output extra debugging")
-  .option(
-    "-a | --aggregator <algorithm>",
-    "aggregator algorithm",
-    "alphabetical"
-  );
+  .option("--debug", "output extra debugging");
 
 program.on("--help", () => {
   console.log();
