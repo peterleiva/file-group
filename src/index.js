@@ -16,17 +16,26 @@ import stats from "./lib/stats.js";
 const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
 /**
  * Main point from the application
- * TODO: melhor errors ao abrir diretório
- * @param {string} base
+ * //TODO: melhor errors ao abrir diretório
+ *
+ * @param {string} base directory to be aggrated
+ * @param {string} aggregator name of aggregator algorithm
+ * @return {Promise<void>}
  */
 async function main(base, aggregator) {
   let Aggregator;
+
   try {
     ({ default: Aggregator } = await import(
-      path.resolve(__dirname, "lib", "grouper", aggregator)
+      /* webpackMode: "lazy" */
+      /* webpackChunkName: "grouper" */
+      /* webpackExclude: /(__tests__|index.js)/ */
+      "./lib/grouper/" + aggregator
     ));
+
+    console.log({ Aggregator });
   } catch (error) {
-    console.error("Failed to load aggregator algorithm");
+    console.error("Failed to load aggregator algorithm: " + aggregator);
     throw error;
   }
 
@@ -62,4 +71,4 @@ async function main(base, aggregator) {
   });
 }
 
-main(program.directory, program.aggregator).catch(console.error);
+program(main);
