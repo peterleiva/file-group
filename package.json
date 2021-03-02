@@ -1,6 +1,6 @@
 {
   "name": "file-group",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "author": "Peter Leiva <pleiva@id.uff.br>",
   "license": "MIT",
   "description": "Tiny software for aggregating files into folders using filter and group naming critereas",

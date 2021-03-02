@@ -1,6 +1,6 @@
 # File-group
 
-Tiny shell script written in _javascript_ to **group the file system into folders**. Given a directory and a choosen pre-built algorithm it use some criterias to filter and naming the director. In some ways, it works as a simplified version of GROUP operation in SQL world
+Tiny script written in _javascript_ to **group the file system into folders**. Given a directory and a choosen pre-built algorithm it use some criterias to filter and naming the director. In some ways, it works as a simplified version of GROUP operation in SQL world
 
 ## Installation
 
@@ -30,8 +30,8 @@ file-group --directory ./dir_to_be_aggregated --aggregator alphabetical
 
 | Aggregator     |                              description                               |
 | -------------- | :--------------------------------------------------------------------: |
-| `alphabetical` |           Group folders into alphabetical order from A to Z            |
-| `name-date`    | Match name followed by date format. eg. `Some filename 2020-09-12.ext` |
+| `alphabetical` (**default**) |  Group folders into alphabetical order from A to Z            |
+| `name-date`    |            Match name followed by date format. eg. `Best shorts - 2020-09-12.txt` |
 
 ## Roadmap
 
