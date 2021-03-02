@@ -17,14 +17,15 @@ module.exports = ({ mode }) =>
     externals: [nodeExternals()],
 
     plugins: [
+      new ESLintPlugin(),
       new webpack.BannerPlugin({
         banner: "#!/usr/bin/env node",
         entryOnly: true,
+        raw: true,
       }),
-      new ESLintPlugin(),
     ],
     output: {
-      filename: "index.bundle.js",
+      filename: "index.bundled.js",
       path: path.resolve(__dirname, "dist"),
     },
   });

@@ -4,12 +4,12 @@
   "author": "Peter Leiva <pleiva@id.uff.br>",
   "license": "MIT",
   "description": "Tiny software for aggregating files into folders using filter and group naming critereas",
-  "main": "dist/index.bundle.js",
+  "main": "dist/index.bundled.js",
   "engines": {
     "node": ">=14.16.0"
   },
   "scripts": {
-    "start": "node dist/index.js",
+    "start": "node dist/index.bundled.js",
     "build": "webpack --env mode=production",
     "dev": "webpack --watch --env mode=production",
     "prettier:check": "prettier --check .",
@@ -17,7 +17,7 @@
     "prepublishOnly": "npm run build"
   },
   "bin": {
-    "file-group": "./dist/index.bundle.js"
+    "file-group": "./dist/index.bundled.js"
   },
   "keywords": [
     "aggregator",
