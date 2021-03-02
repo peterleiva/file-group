@@ -1,0 +1,11 @@
+# dependencies
+node_modules
+
+# test coverage files
+coverage
+
+# configurations
+webpack.config.js
+
+# Release assets
+dist

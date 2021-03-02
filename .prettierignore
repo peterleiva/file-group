@@ -1,4 +1,12 @@
-node_modules
-coverage/
+# OS files
 .DS_Store
+
+# Dependencies
+node_modules
 package-lock.json
+
+# Coverage files
+coverage/
+
+# Release folder
+dist/
