@@ -2,31 +2,32 @@
  * @file Parse arguments using commander module
  */
 
-import program from 'commander';
+import program from "commander";
+import { version } from "../../package.json";
 
 program
-  .version('0.3.0')
-  .name('file-group')
+  .version(version)
+  .name("file-group")
   .description(
-    'File aggregator group files into folders, using a existing ' +
-      'algorythm or used a combination of filter and naming options'
+    "File aggregator group files into folders, using a existing " +
+      "algorithms or used a combination of filter and naming options"
   );
 
 program
-  .requiredOption('-d | --directory <dir>', 'directory path to be aggregated')
-  .option('-f | --filter <pattern>', 'filter pattern as regex')
-  .option('-n | --naming <pattern>', 'naming pattern as regex??')
-  .option('--debug', 'output extra debugging')
+  .requiredOption("-d | --directory <dir>", "directory path to be aggregated")
+  .option("-f | --filter <pattern>", "filter pattern as regex")
+  .option("-n | --naming <pattern>", "naming pattern as regex??")
+  .option("--debug", "output extra debugging")
   .option(
-    '-a | --aggregator <algorithm>',
-    'aggregator algorithm',
-    'alphabetical'
+    "-a | --aggregator <algorithm>",
+    "aggregator algorithm",
+    "alphabetical"
   );
 
-program.on('--help', () => {
+program.on("--help", () => {
   console.log();
-  console.log('Example call');
-  console.log('  $ file-group --directory ./dir');
+  console.log("Example call");
+  console.log("  $ file-group --directory ./dir");
 });
 
 program.parse(process.argv);
