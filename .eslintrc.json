@@ -16,11 +16,13 @@
     "sourceType": "module"
   },
   "rules": {
-    "max-len": ["warn", { "code": 80, "tabWidth": 2 }],
+    "max-len": ["warn", { "code": 80 }],
     "jest/no-disabled-tests": "warn",
     "jest/no-focused-tests": "error",
     "jest/no-identical-title": "error",
     "jest/prefer-to-have-length": "warn",
-    "jest/valid-expect": "error"
+    "jest/valid-expect": "error",
+    "node/no-unsupported-features/es-syntax": "off",
+    "no-unused-vars": "warn"
   }
 }
