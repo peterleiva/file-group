@@ -3,10 +3,10 @@
  */
 
 import program from "commander";
-import { version } from "../../package.json";
+import pkg from "../../package.json";
 
 program
-  .version(version)
+  .version(pkg.version)
   .name("file-group")
   .description(
     "File aggregator group files into folders, using a existing " +
