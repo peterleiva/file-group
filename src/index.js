@@ -32,8 +32,6 @@ async function main(base, aggregator) {
       /* webpackExclude: /(__tests__|index.js)/ */
       "./lib/grouper/" + aggregator
     ));
-
-    console.log({ Aggregator });
   } catch (error) {
     console.error("Failed to load aggregator algorithm: " + aggregator);
     throw error;
