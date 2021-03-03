@@ -12,26 +12,26 @@ npm install -g file-group
 
 ## Usage
 
-The only required option is the `directory` which you specifie the directory to aggregate.
+The only required option is the `--aggregate | -a` which you specify the aggregation algoritm.
 
 ```javascript
-file-group --directory ./dir_to_be_aggregated
+file-group -a name-date <directory>
 ```
 
 ### Choosing an aggregator
 
-You can also choose one of pre-built aggregator algorythm
+You can one of pre-built aggregator algorithms
 
 ```javascript
-file-group --directory ./dir_to_be_aggregated --aggregator alphabetical
+file-group --aggregator alphabetical <directory>
 ```
 
 ### Aggregators
 
-| Aggregator     |                              description                               |
-| -------------- | :--------------------------------------------------------------------: |
-| `alphabetical` (**default**) |  Group folders into alphabetical order from A to Z            |
-| `name-date`    |            Match name followed by date format. eg. `Best shorts - 2020-09-12.txt` |
+| Aggregator                   |                              description                               |
+| ---------------------------- | :--------------------------------------------------------------------: |
+| `alphabetical` (**default**) |           Group folders into alphabetical order from A to Z            |
+| `name-date`                  | Match name followed by date format. eg. `Best shorts - 2020-09-12.txt` |
 
 ## Roadmap
 
