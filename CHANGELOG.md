@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unrelease]
 
+## [0.4.1] - 2021-03-03
+
+### Changed
+
+- Update README.md to the correct modifition on [v0.4.0](https://github.com/peterleiva/group/releases/tag/v0.4.0)
+
 ## [0.4.0] - 2021-03-02
 
 ### Changed
@@ -19,6 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Torna opção `--aggregator` obrigatória
 
-[unrelease]: https://github.com/peterleiva/group/compare/v0.4.0...HEAD
+[unrelease]: https://github.com/peterleiva/group/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/peterleiva/group/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/peterleiva/group/compare/v0.3.6...v0.4.0
 [0.3.6]: https://github.com/peterleiva/group/compare/v0.3.5...v0.3.6
