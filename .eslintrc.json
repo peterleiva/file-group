@@ -23,6 +23,13 @@
     "jest/prefer-to-have-length": "warn",
     "jest/valid-expect": "error",
     "node/no-unsupported-features/es-syntax": "off",
-    "no-unused-vars": "warn"
+    "no-unused-vars": "warn",
+    "node/no-missing-import": [
+      "error",
+      {
+        "resolvePaths": ["./src"],
+        "tryExtensions": [".js", ".json"]
+      }
+    ]
   }
 }
