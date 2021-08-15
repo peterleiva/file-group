@@ -7,7 +7,7 @@ describe("NameDateAggregator", () => {
 
   describe("No name giving", () => {
     it("Throws no given name error", () => {
-      expect(new Aggregator()).toThrowError("Name must be a string");
+      expect(() => new Aggregator()).toThrowError("Name must be a string");
     });
   });
 
