@@ -8,10 +8,7 @@
 import fs from "fs/promises";
 import path from "path";
 import readline from "readline";
-import program from "./lib/commander.js";
-import organizer from "./lib/organizer.js";
-import mapper from "./lib/mapper.js";
-import stats from "./lib/stats.js";
+import { stats, mapper, organizer, commander as program } from "lib";
 
 const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
 /**
@@ -19,10 +16,13 @@ const ACCEPTANCE_PATTERN = /^(y|yes)$/i;
  * //TODO: melhor errors ao abrir diretório
  *
  * @param {string} base directory to be aggrated
- * @param {string} aggregator name of aggregator algorithm
+ * @param {Object} options - cli options
+ * @param {string} options.aggregator - name of aggregator algorithm
+ * @param {boolean} [options.yes = false] - proceed anyway info
+ * @param {boolean} [options.info = true] - proceed anyway info
  * @return {Promise<void>}
  */
-async function main(base, aggregator) {
+async function main(base, { aggregator, yes, info }) {
   let Aggregator;
 
   try {
@@ -33,7 +33,10 @@ async function main(base, aggregator) {
       "./lib/grouper/" + aggregator
     ));
   } catch (error) {
-    console.error("Failed to load aggregator algorithm: " + aggregator);
+    if (error.code === "ENOENT") {
+      console.error("Failed to load aggregator algorithm: " + aggregator);
+    }
+
     throw error;
   }
 
@@ -46,24 +49,29 @@ async function main(base, aggregator) {
     throw error;
   }
 
-  const direntGroups = await mapper(Aggregator, directory);
-  const directoryStats = stats(direntGroups, base);
+  const groups = await mapper(Aggregator, directory);
+  const statsPrinter = stats(groups, base);
 
-  directoryStats.groups();
+  if (info) {
+    await statsPrinter.files();
+    statsPrinter.groups();
+  }
+
+  if (yes) {
+    return organizer(base, groups);
+  }
 
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   });
 
-  rl.question("Are you sure (y/N)?: ", async (answer) => {
+  rl.question("\nAre you sure ? ([y]es/[N]O) ", async (answer) => {
     if (!ACCEPTANCE_PATTERN.exec(answer)) {
-      console.info("You answer is NO");
-      return rl.close();
+      console.warn("You answer is NO");
+    } else {
+      await organizer(base, groups);
     }
-
-    directoryStats.files();
-    await organizer(base, direntGroups);
 
     rl.close();
   });

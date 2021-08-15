@@ -19,9 +19,11 @@ program
 
 // options
 program
-  .requiredOption("-a | --aggregator <algorithm>", "aggregator")
-  .option("-f | --filter <pattern>", "filter pattern as regex")
-  .option("-n | --naming <pattern>", "naming pattern as regex??")
+  .requiredOption("-a, --aggregator <algorithm>", "aggregator")
+  .option("-f, --filter <pattern>", "filter pattern as regex")
+  .option("-n, --naming <pattern>", "naming pattern as regex??")
+  .option("-y, --yes", "proceed witouth ask permission")
+  .option("-ni, --no-info", "do not print stats")
   .option("--debug", "output extra debugging");
 
 program.on("--help", () => {
@@ -34,13 +36,13 @@ program.parse(process.argv);
 
 /**
  * Run a action at a program top-level command in this case directory
- * @param {Function} action Program action be executed on top-level argument
+ * @param {Promise<void>} action action be executed by top-level argument
  */
 export default async function (action) {
   program
     .arguments("<directory>")
     .action((directory, options) =>
-      action(directory, options.aggregator).catch(console.error)
+      action(directory, options).catch(console.error)
     );
   await program.parseAsync(process.argv);
 }
