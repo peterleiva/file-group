@@ -21,7 +21,7 @@
     "prepublishOnly": "npm run build"
   },
   "bin": {
-    "file-group": "./dist/index.bundled.js"
+    "file-group": "./dist/cli.js"
   },
   "keywords": [
     "aggregator",
