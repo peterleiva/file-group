@@ -12,6 +12,7 @@
     "start": "node .",
     "build": "webpack --env mode=production",
     "dev": "npm run build -- --watch",
+    "lint": "eslint .",
     "format": "npm run prettier -- --write",
     "format:check": "npm run prettier -- --check",
     "prettier": "prettier .",
