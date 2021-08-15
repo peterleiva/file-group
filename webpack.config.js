@@ -12,8 +12,22 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 module.exports = ({ mode }) => ({
   target: "node",
   mode,
+  entry: "index.js",
+  context: path.resolve(__dirname, "src"),
+  module: {
+    rules: [
+      {
+        exclude: [/node_modules/],
+        use: "babel-loader",
+        test: /\.js$/,
+      },
+    ],
+  },
+  resolve: {
+    modules: ["node_modules", path.resolve(__dirname, "src")],
+  },
+  externalsPresets: { node: true },
   externals: [nodeExternals()],
-
   plugins: [
     new ESLintPlugin(),
     new webpack.BannerPlugin({
@@ -23,7 +37,11 @@ module.exports = ({ mode }) => ({
     }),
   ],
   output: {
-    filename: "index.bundled.js",
+    filename: "cli.js",
     path: path.resolve(__dirname, "dist"),
+    clean: true,
+  },
+  optimization: {
+    chunkIds: "named",
   },
 });
