@@ -52,7 +52,7 @@
     "webpack-node-externals": "^2.5.2"
   },
   "dependencies": {
-    "bytes": "^3.1.0",
+    "bytes": "^3.1.2",
     "commander": "^6.2.1",
     "pluralize": "^8.0.0"
   }
